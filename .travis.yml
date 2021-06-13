@@ -1,7 +1,20 @@
 language: generic
 sudo: required
 
-services: -docker
+services:
+  - docker
 
 before_install:
   - docker build -t neeljain14/docker-react .
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-south-1'
+  app: 'docker-neel'
+  env: 'Dockerneel-env'
+  bucket_name: 'elasticbeanstalk-ap-south-1-554703465220'
+  bucker_path: 'docker-neel'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
